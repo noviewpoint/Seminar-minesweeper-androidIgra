@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
+    <color name="background">#7688B3</color>
+    <color name="game_board">#7688B3</color>
+    <color name="menu_button">#7688B3</color>
+    <color name="gumbi">#C9C9C9</color>
+
+</resources>

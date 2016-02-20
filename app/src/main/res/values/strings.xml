@@ -1,0 +1,74 @@
+<resources>
+
+    <string name="app_name">Minolovec</string>
+    <string name="menu_settings">Nastavitve</string>
+    <string name="title_activity_minolovec">Minolovec</string>
+    <string name="new_game">Nova igra</string>
+    <string name="continue_game">Nadaljuj</string>
+    <string name="high_scores">Najboljši rezultati</string>
+    <string name="rules">Pravila</string>
+    <string name="exit">Izhod</string>
+
+    <string name="rules_content">Minolovec je varljivo preprost preizkus spomina in sklepanja ter hkrati ena najbolj priljubljenih iger vseh časov.
+        \n
+        \n
+        Cilj: poiščite prazne kvadratke in se izogibajte minam.
+        \n
+        \n
+        \n
+        1. Za začetek izberite NOVA IGRA.
+        \n
+        2. Izberite težavnost – Lahko, Srednje ali Težko.
+        \n
+        3. Začnete tako, da kliknite kvadratek.
+        \n
+        4. Če želite ponovno igrati, pritisnite smeška.
+        \n
+        \n
+        \n
+        \tZveni preprosto, kajne?
+        \n
+        \n
+        \n
+        Pravila v Minolovcu so preprosta:
+        \n
+        \n
+            • Če odkrijete mino, je igra za vas končana.\n
+            • Če odkrijete prazen kvadratek, lahko igrate naprej.\n
+            • Če odkrijete številko, vam ta pove, koliko min leži skritih v osmih kvadratkih okoli nje.
+        Ta podatek vam pomaga pri ugotavljanju, kateri kvadratki v bližini ne skrivajo mine.\n
+        \n
+        \n
+        Namigi in nasveti:
+        \n
+        \n
+        • Označite mine. Če menite, da se pod kvadratkom skriva mina, ga pritisnite in pritisk zadržite. Tako na kvadratek postavite zastavico. Če niste prepričani, postopek ponovite in spremenila se bo v vprašaj.
+        \n
+        \n
+        • Preučujte vzorce. Če so pod tremi zaporednimi kvadratki prikazane številke 2-3-2, potem so verjetno zraven teh kvadratkov skrite tri zaporedne mine. Če se v kvadratku prikaže 8, potem so v vseh kvadratkih okoli njega podtaknjene mine.
+        \n
+        \n
+        • Raziščite neraziskano. Ne veste, kam bi pritisnili zdaj? Poskusite počistiti nekaj neraziskane igralne površine. Bolje jo boste odnesli, če pritisnete v sredino neoznačenih kvadratkov, kot pa če to naredite v območju, kjer sumite, da so podtaknjene mine.
+    </string>
+
+    <string name="rules_title">Kako igrati?</string>
+
+    <!--<string name="action_settings">Aplikacija ne podpira nastavitev. Premakni se nazaj :)</string>-->
+
+    <string name="difficulty_title">Izberi težavnost</string>
+    <string name="easy_label">Lahko | 9x9 | 10 min</string>
+    <string name="medium_label">Srednje | 16x16 | 40 min</string>
+    <string name="hard_label">Težko | 30x16 | 99 min</string>
+
+    <string name="timer"></string>
+    <string name="minesCount"></string>
+    <string name="rezultatiUvod">Najboljši rezultati</string>
+
+    <string name="easy_highscores_button">Lahko</string>
+    <string name="medium_highscores_button">Srednje</string>
+    <string name="hard_highscores_button">Težko</string>
+
+    <string name="zmagovalniTekstSumniki">Čestitke :)</string>
+    <string name="luzerTekst">Več sreče prihodnjič :(</string>
+
+</resources>

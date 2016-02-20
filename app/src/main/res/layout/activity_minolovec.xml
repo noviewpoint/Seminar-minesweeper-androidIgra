@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dip"
+    android:background="@color/background">
+
+    <Button android:id="@+id/new_game_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_game"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/hover_button"/>
+    <!--<Button android:id="@+id/continue_game_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/continue_game"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_button" />-->
+    <Button android:id="@+id/high_scores_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/high_scores"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/hover_button" />
+    <Button android:id="@+id/rules_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rules"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/hover_button" />
+    <Button android:id="@+id/exit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exit"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/hover_button" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mina_happy" />
+
+</LinearLayout>
