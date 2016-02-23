@@ -2,7 +2,9 @@ package com.example.david.minolovec;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.app.AlertDialog;
 
 import android.os.Handler;
 import android.util.Log;

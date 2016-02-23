@@ -24,6 +24,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="35px">
+        <Button android:id="@+id/moji_highscores_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/moji_highscores_button"
+            android:background="@drawable/hover_button"/>
         <Button android:id="@+id/easy_highscores_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,12 +54,14 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <!--<WebView
-            android:id="@+id/rezultati"
+            android:id="@+id/ble"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="#000000"
             android:textSize="35sp"
-            android:background="@color/gumbi"/>-->
+            android:background="@android:color/transparent" />-->
+
     </LinearLayout>
 </LinearLayout>

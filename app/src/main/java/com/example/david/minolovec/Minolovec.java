@@ -71,10 +71,8 @@ public class Minolovec extends Activity implements OnClickListener
         new AlertDialog.Builder(this)
                 .setTitle(R.string.difficulty_title)
                 .setItems(R.array.difficulty,
-                        new DialogInterface.OnClickListener()
-                        {
-                            public void onClick(DialogInterface dialoginterface, int i)
-                            {
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialoginterface, int i) {
                                 startNewGame(i);
                             }
                         }).show();

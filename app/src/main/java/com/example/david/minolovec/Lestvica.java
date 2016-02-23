@@ -1,40 +1,41 @@
 package com.example.david.minolovec;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Lestvica extends Activity implements View.OnClickListener
 {
-    public WebView rezultati;
     String filename = "lestvica_";
-    public LinearLayout tabela;
-    public TextView[] t;
-    public LinearLayout.LayoutParams dim;
+
+    public ArrayList<JSONObject> rezultati = new ArrayList<>();
+
+    Lestvica activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.highscores);
-        //rezultati = (WebView) findViewById(R.id.rezultati);
-        tabela = (LinearLayout)findViewById(R.id.tabelaRezultatov);
 
-        t = new TextView[10];
-        dim = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.TEXT_ALIGNMENT_GRAVITY);
+        this.activity = this;
 
+        new Lestvica2(activity).execute();
+
+        View x0 = findViewById(R.id.moji_highscores_button);
+        x0.setOnClickListener(this);
 
         View x1 = findViewById(R.id.easy_highscores_button);
         x1.setOnClickListener(this);
@@ -44,24 +45,23 @@ public class Lestvica extends Activity implements View.OnClickListener
 
         View x3 = findViewById(R.id.hard_highscores_button);
         x3.setOnClickListener(this);
-
-        // defautl izpise highscore za easy game
-        izpisiHighscores("10");
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         switch(v.getId())
         {
+            case R.id.moji_highscores_button:
+                izpisiRezultate(0);
+                break;
             case R.id.easy_highscores_button:
-                izpisiHighscores("10");
+                izpisiRezultate(1);
                 break;
             case R.id.medium_highscores_button:
-                izpisiHighscores("40");
+                izpisiRezultate(2);
                 break;
             case R.id.hard_highscores_button:
-                izpisiHighscores("99");
+                izpisiRezultate(3);
                 break;
             default:
                 break;
@@ -74,52 +74,82 @@ public class Lestvica extends Activity implements View.OnClickListener
         izpisiHighscores("10");
     }*/
 
+    public void izpisiRezultate(Integer x) {
 
-    public void izpisiHighscores(String tezavnost) {
+        //WebView ble = (WebView) findViewById(R.id.ble);
+        WebView ble = (WebView) new WebView(this);
+        setContentView(ble);
 
-        // odstrani prejsnje childe
-        if(((LinearLayout) tabela).getChildCount() > 0)
+        // naredi transparentni web view
+        ble.getSettings();
+        ble.setBackgroundColor(0x00000);
+
+        String styles_table = "table {background-color: white; border: 1px solid black; width: 100%; text-align: center; margin: 0 auto;}th {font-size: 1.2em; text-align: center; padding-top: 7px; padding-bottom: 12px; background-color: rgb(123, 175, 43); color:white;}";
+        String styles_th = "th {font-size: 1.2em; text-align: center; padding-top: 7px; padding-bottom: 12px; background-color: #A7C942; color:white;}";
+
+
+        String izpisHTML = "<html><head><style>" + styles_table + "</style></head><body><table><tr><th>Name</th><th>Score</th><th>Country</th></tr>";
+
+        int b = 0;
+
+        for(int i = 0;(i < rezultati.size() && i < 10); i++)
         {
-            ((LinearLayout) tabela).removeAllViews();
-        }
+            try {
+                String izpis;
+                String ime;
+                String dosezek;
+                String drzava;
+                String tezavnost = (String) rezultati.get(i).get("difficulty_scores");
 
-        String vsebina = beriIzDatoteke(filename + tezavnost);
-        String izpisHTML = "";
-        // izbrise prejsnje vrednosti
-        //rezultati.loadData(izpisHTML, "text/html", "utf-8");
-        //Log.d("this is my array", vsebina);
+                if (tezavnost.equals(x.toString())) {
 
-        String[] numberStrings = vsebina.split(",");
+                    ime = (String) rezultati.get(i).get("username_users");
+                    dosezek = (String) rezultati.get(i).get("score_scores");
+                    drzava = (String) rezultati.get(i).get("name_countries");
 
-        izpisHTML = "<body style='background-color: #C9C9C9;'>Tvoji rezultati za to zahtevnost so:<ul>";
+                    izpis = ime + dosezek + drzava;
 
-        for(int i = 0;(i < numberStrings.length && i < 10); i++)
-        {
-            izpisHTML += "<li>" + numberStrings[i] + " sekund</li>";
+                    // <img src='images/flags/".strtolower($row['flag']).".png' />
+                    izpisHTML += "<tr><td>"+ime+"</td><td>"+dosezek+"</td><td>"+drzava+"</td></tr>";
 
-            if (!numberStrings[i].isEmpty())
-            {
-                t[i] = new TextView(this);
-                t[i].setLayoutParams(dim);
-                t[i].setText(numberStrings[i] + " sekund");
-                t[i].setGravity(Gravity.CENTER);
-                t[i].setBackgroundResource(R.color.gumbi);
-                t[i].setTextColor(Color.BLACK);
-                t[i].setTextSize(14);
-                tabela.addView(t[i]);
+                    b++;
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
 
-        izpisHTML += "</ul></body>";
+        Log.d("izpis", "HTML je" + izpisHTML);
+        izpisHTML += "</table></body>";
+        ble.loadData(izpisHTML, "text/html; charset=utf-8", "utf-8");
+    }
 
-        //Log.d("this is my array", izpisHTML);
 
-        //rezultati.loadData(izpisHTML, "text/html", "utf-8");
+    //String izpisHTML = "";
+    // rezultati.loadData(izpisHTML, "text/html", "utf-8");
+
+    //String[] numberStrings = vsebina.split(",");
+
+    //izpisHTML = "<body style='background-color: #C9C9C9;'>Tvoji rezultati za to zahtevnost so:<ul>";
+
+       // izpisHTML += "<li>" + numberStrings[i] + " sekund</li>";
+
+
+   // izpisHTML += "</ul></body>";
+
+    //Log.d("this is my array", izpisHTML);
+
+    //rezultati.loadData(izpisHTML, "text/html", "utf-8");
 
         /*CharSequence text = "Highscore so: " + vsebina;
         Toast.makeText(getApplicationContext(), text,
                 Toast.LENGTH_SHORT).show();*/
-    }
+
+
+
+
+
 
     private String beriIzDatoteke(String ime){
 
@@ -147,4 +177,30 @@ public class Lestvica extends Activity implements View.OnClickListener
 
         return vsebina;
     }
+
+    /*
+    Metoda je poklicana preko povratnega klica iz enega izmed odjemalcev REST storitve, ko ta dobi odgovor od storitve
+    * */
+    public void odgovorStoritve(String odgovor) {
+
+        JSONArray jsonArray = null;
+
+        try {
+            jsonArray = new JSONArray(odgovor);
+
+
+            if (jsonArray != null) {
+                for (int i=0; i < jsonArray.length(); i++){
+                    JSONObject explrObject = jsonArray.getJSONObject(i);
+                    rezultati.add(explrObject);
+                }
+            }
+        } catch (Exception e) {
+            Log.d("izpis", "neki ni bilo v redu" + e);
+        }
+
+        // default izpise highscore za easy game
+        izpisiRezultate(1);
+    }
+
 }
